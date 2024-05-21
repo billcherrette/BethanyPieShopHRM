@@ -7,6 +7,30 @@ Console.WriteLine("--------------------\n");
 
 Employee bethany = new Employee("Bethany", "Smith", "bethany@snowball.be", new DateTime(1979, 1, 16), 25);
 
+bethany.PerformWork(25);
+
+string name = "bethany";
+string anotherName = name;
+name += " smith";
+
+Console.WriteLine("Name: " + name);
+Console.WriteLine("Another name: " + anotherName);
+
+//int minimumBonus = 100;
+//int receivedBonus = bethany.CalculateBonus(minimumBonus);
+//Console.WriteLine($"The minimum bonus is {minimumBonus} and {bethany.firstName} has received a bonus of {receivedBonus}");
+
+int minimumBonus = 100;
+int bonusTax;
+int receivedBonus = bethany.CalculateBonusAndBonusTax(minimumBonus, out bonusTax);
+Console.WriteLine($"The minimum bonus is {minimumBonus}, the bonus tax is {bonusTax} and {bethany.firstName} has received a bonus of {receivedBonus}");
+
+Employee testEmployee = bethany;
+testEmployee.firstName = "Gill";
+testEmployee.DisplayEmployeeDetails();
+bethany.DisplayEmployeeDetails();
+
+
 bethany.DisplayEmployeeDetails();
 
 bethany.PerformWork();
