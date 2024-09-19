@@ -1,13 +1,7 @@
 ﻿using BethanysPieShopHRM.Logic;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.Marshalling;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BethanyPieShopHRM.HR
+namespace BethanysPieShopHRM.HR
 {
     public class Employee: IEmployee
     {
@@ -20,7 +14,6 @@ namespace BethanyPieShopHRM.HR
         private double? hourlyRate;
 
         private DateTime birthDay;
-
         private const int minimalHoursWorkedUnit = 1;
 
         private Address address;
@@ -29,10 +22,7 @@ namespace BethanyPieShopHRM.HR
 
         public string FirstName
         {
-            get
-            {
-                return firstName;
-            }
+            get { return firstName; }
             set
             {
                 firstName = value;
@@ -41,10 +31,7 @@ namespace BethanyPieShopHRM.HR
 
         public string LastName
         {
-            get
-            {
-                return lastName;
-            }
+            get { return lastName; }
             set
             {
                 lastName = value;
@@ -72,9 +59,9 @@ namespace BethanyPieShopHRM.HR
         public double Wage
         {
             get { return wage; }
-            private set 
-            { 
-                wage = value; 
+            private set
+            {
+                wage = value;
             }
         }
 
@@ -83,13 +70,14 @@ namespace BethanyPieShopHRM.HR
             get { return hourlyRate; }
             set
             {
-                if (hourlyRate < 0) //this should always be higher than 0
+                if (hourlyRate < 0)//this should always be higher than 0
                 {
                     hourlyRate = 0;
                 }
                 else
                 {
                     hourlyRate = value;
+
                 }
             }
         }
@@ -109,11 +97,12 @@ namespace BethanyPieShopHRM.HR
             set
             {
                 address = value;
-
             }
         }
 
-        public Employee(string firstName, string lastName, string email, DateTime birthDay) : this(firstName, lastName, email, birthDay, 0)
+
+        public Employee(string firstName, string lastName, string email, DateTime birthDay)
+            : this(firstName, lastName, email, birthDay, 0)
         {
         }
 
@@ -124,6 +113,7 @@ namespace BethanyPieShopHRM.HR
             Email = email;
             BirthDay = birthDay;
             HourlyRate = hourlyRate ?? 10;
+            
         }
 
         public Employee(string firstName, string lastName, string email, DateTime birthDay, double? hourlyRate, string street, string houseNumber, string zip, string city)
@@ -134,24 +124,25 @@ namespace BethanyPieShopHRM.HR
             BirthDay = birthDay;
             HourlyRate = hourlyRate ?? 10;
 
-            Address = new Address(street, houseNumber, zip, city);
+            Address = new Address(street, houseNumber, zip, city);  
         }
 
         public void PerformWork()
         {
-            //numberOfHoursWorked++;
             PerformWork(minimalHoursWorkedUnit);
-            //Console.WriteLine($"{firstName} {lastName} has worked for {numberOfHoursWorked} hour(s)!");
         }
 
         public void PerformWork(int numberOfHours)
         {
             NumberOfHoursWorked += numberOfHours;
+            NumberOfHoursWorked++;
+
             Console.WriteLine($"{FirstName} {LastName} has worked for {numberOfHours} hour(s)!");
         }
 
         public int CalculateBonus(int bonus)
         {
+
             if (NumberOfHoursWorked > 10)
                 bonus *= 2;
 
@@ -170,6 +161,7 @@ namespace BethanyPieShopHRM.HR
                 bonusTax = bonus / 10;
                 bonus -= bonusTax;
             }
+
             Console.WriteLine($"The employee got a bonus of {bonus} and the tax on the bonus is {bonusTax}");
             return bonus;
         }
@@ -179,38 +171,36 @@ namespace BethanyPieShopHRM.HR
             Console.WriteLine($"{FirstName} {LastName} received a generic bonus of 100!");
         }
 
-        public static void UsingACustomType()
-        {
-            List<string> list = new List<string>();
-
-
-        }
-
-        public double CalculateWage()
-        {
-            WageCalculations wageCalculations =  new WageCalculations();
-            double calculatedValue = wageCalculations.ComplexWageCalculation(Wage, taxRate, 3, 42);
-            return calculatedValue;
-        }
-
-        public string ConvertToJson()
-        {
-            string json = JsonConvert.SerializeObject(this);
-            return json;
-        }
-
         public double ReceiveWage(bool resetHours = true)
         {
             double wageBeforeTax = NumberOfHoursWorked * HourlyRate.Value;
             double taxAmount = wageBeforeTax * taxRate;
 
             Wage = wageBeforeTax - taxAmount;
+
             Console.WriteLine($"{FirstName} {LastName} has received a wage of {Wage} for {NumberOfHoursWorked} hour(s) of work.");
 
             if (resetHours)
                 NumberOfHoursWorked = 0;
 
             return Wage;
+        }
+
+        public double CalculateWage()
+        {
+            WageCalculations wageCalculations = new WageCalculations();
+
+            double calculateValue = wageCalculations.ComplexWageCalculation(Wage, taxRate, 3, 42);
+
+            return calculateValue;
+
+        }
+
+        public string ConvertToJson()
+        {
+            string json = JsonConvert.SerializeObject(this);
+
+            return json;
         }
 
         public static void DisplayTaxRate()
@@ -220,7 +210,7 @@ namespace BethanyPieShopHRM.HR
 
         public void DisplayEmployeeDetails()
         {
-            Console.WriteLine($"\nFirst name: \t{FirstName}\nLast name: \t{LastName}\nEmail: \t\t{Email}\nBirthday: \t{BirthDay.ToShortDateString()}\nEmployee type: \t{HourlyRate}");
+            Console.WriteLine($"\nFirst name: \t{FirstName}\nLast name: \t{LastName}\nEmail: \t\t{Email}\nBirthday: \t{BirthDay.ToShortDateString()}\n");
         }
 
         public void GiveCompliment()

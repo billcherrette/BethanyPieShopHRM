@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BethanyPieShopHRM.HR
+namespace BethanysPieShopHRM.HR
 {
     internal class Researcher : Employee
     {
+
         public Researcher(string firstName, string lastName, string email, DateTime birthDay, double? hourlyRate) : base(firstName, lastName, email, birthDay, hourlyRate)
         {
-
         }
+
         private int numberOfPieTastesInvented = 0;
         public int NumberOfPieTastesInvented
         {
@@ -24,11 +25,12 @@ namespace BethanyPieShopHRM.HR
                 numberOfPieTastesInvented = value;
             }
         }
+
         public void ResearchNewPieTastes(int researchHours)
         {
             NumberOfHoursWorked += researchHours;
 
-            if (new Random().Next(100) > 50)//we'll leave it to chance
+            if (new Random().Next(100) > 50)//we'll leave it to chance!
             {
                 NumberOfPieTastesInvented++;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BethanyPieShopHRM.HR
+namespace BethanysPieShopHRM.HR
 {
     internal interface IEmployee
     {

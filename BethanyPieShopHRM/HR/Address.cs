@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BethanyPieShopHRM.HR
+namespace BethanysPieShopHRM.HR
 {
     public class Address
     {
@@ -12,7 +12,6 @@ namespace BethanyPieShopHRM.HR
         private string houseNumber;
         private string zipCode;
         private string city;
-
 
         public Address(string street, string houseNumber, string zipCode, string city)
         {
@@ -30,7 +29,6 @@ namespace BethanyPieShopHRM.HR
                 street = value;
             }
         }
-
         public string HouseNumber
         {
             get { return houseNumber; }
@@ -49,7 +47,10 @@ namespace BethanyPieShopHRM.HR
         }
         public string City
         {
-            get { return city; }
+            get
+            {
+                return city;
+            }
             set
             {
                 city = value;
